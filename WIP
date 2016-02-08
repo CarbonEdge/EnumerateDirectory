@@ -1,0 +1,42 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EnumerateDirectory
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                // LINQ query for all .txt files containing the word 'Europe'.
+                var files = from file in Directory.EnumerateFiles(@"C:\Users\*\Documents\DELETEasap", "*.txt")// what ever file path seems right
+                            //where file.ToLower().Contains("sql")//looks for particular naming convention
+                            select file;//this seems neccesary, not sure why.
+
+                foreach (var file in files)
+                {
+                    Console.WriteLine("{0}", file);// outputs file path. This is faster than what we use now
+                    string contents = File.ReadAllText(file);// Reads file. Arguably this is where you would try to read line by line
+                    Console.WriteLine(contents);// outputs file contents
+                }
+                Console.WriteLine("{0} files found.", files.Count<string>().ToString());
+            }
+            
+
+            catch (UnauthorizedAccessException UAEx)
+            {
+                Console.WriteLine(UAEx.Message);
+            }
+            catch (PathTooLongException PathEx)
+            {
+                Console.WriteLine(PathEx.Message);
+            }
+            Console.ReadKey();
+        }
+    }
+}
