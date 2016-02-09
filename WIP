@@ -16,7 +16,7 @@ namespace EnumerateDirectory
                 // LINQ query for all .txt files containing the word 'Europe'.
                 var files = from file in Directory.EnumerateFiles(@"C:\Users\*\Documents\DELETEasap", "*.txt")// what ever file path seems right
                             //where file.ToLower().Contains("sql")//looks for particular naming convention
-                            select file;//this seems neccesary, not sure why.
+                            select file;//this seems neccesary, not sure why.(.SelectedPath might do the same thing)
 
                 foreach (var file in files)
                 {
